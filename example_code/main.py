@@ -118,7 +118,7 @@ def link_ids():
     Just get a bunch of link ids
     '''
     url_handler = UrlHandler("alice is awesome")
-    link_id_stream = LinkIDStream.LinkIdStream(url_handler, "t3_1z18a7")
+    link_id_stream = LinkIDStream.LinkIdStream(url_handler, "t3_1z0ghr")
     link_file = open("links.json", "a+")
     while True:
         link_file.write(json.dumps(link_id_stream.get_next_link()) + "\n");
