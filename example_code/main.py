@@ -11,6 +11,7 @@ import json
 import LinkIDStream
 import matplotlib.pyplot as plt
 from example_code.LinkIDStream import LinkIdStream
+from sympy.plotting.plot import Line2DBaseSeries
 
 def something(comments_seen, comments_created, comment, date_to, date_from):
     '''
@@ -118,8 +119,23 @@ def link_ids():
     Just get a bunch of link ids
     '''
     url_handler = UrlHandler("alice is awesome")
-    link_id_stream = LinkIDStream.LinkIdStream(url_handler, "t3_1z0ghr")
-    link_file = open("links.json", "a+")
+   
+    hold = "t3_1z0ghr";
+    link_file = open("links2.json", "a+")
+    link_file.write("");
+    link_file.close()
+    link_file = open("links2.json", "r+")
+    line1 = ""
+    try:
+        line1 = link_file.readlines()[-2]
+    except: 
+        print "file issue"
+    print line1
+    if line1 != "":
+        hold = json.loads(line1)["name"]
+    link_file.close()
+    link_file = open("links2.json", "a+")
+    link_id_stream = LinkIDStream.LinkIdStream(url_handler, hold)     
     while True:
         link_file.write(json.dumps(link_id_stream.get_next_link()) + "\n");
     
